@@ -4,9 +4,11 @@ const ACCESS_TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
 
 export const tokenStorage = {
-  async setTokens(accessToken: string, refreshToken: string) {
+  async setTokens(accessToken: string, refreshToken?: string) {
     await SecureStore.setItemAsync(ACCESS_TOKEN_KEY, accessToken);
-    await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, refreshToken);
+    if (refreshToken) {
+      await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, refreshToken);
+    }
   },
 
   async getAccessToken(): Promise<string | null> {
