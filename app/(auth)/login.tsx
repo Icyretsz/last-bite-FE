@@ -1,5 +1,6 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { LoadingSpinner } from '@/components/loading-spinner';
 import { Colors } from '@/constants/colors';
 import { useLogin } from '@/hooks/useAuth';
 import { useRouter } from 'expo-router';
@@ -27,7 +28,10 @@ export default function LoginScreen() {
   };
 
   return (
-    <KeyboardAvoidingView 
+    <>
+      <LoadingSpinner visible={isPending} />
+
+      <KeyboardAvoidingView 
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
@@ -108,6 +112,7 @@ export default function LoginScreen() {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+    </>
   );
 }
 
