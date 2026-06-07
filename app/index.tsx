@@ -24,7 +24,12 @@ export default function AppSplashScreen() {
         await SplashScreen.hideAsync();
 
         const user = storage.getCurrentUser();
-        const pendingEmail = await tokenStorage.getItem('pending_verification_email');
+        let pendingEmail = null;
+        try {
+          pendingEmail = await tokenStorage.getItem('pending_verification_email');
+        } catch {
+          // AsyncStorage not ready, continue without pending email
+        }
 
         if (user) {
           if (user.isVendor) {
@@ -33,7 +38,6 @@ export default function AppSplashScreen() {
             router.replace('/(consumer)/home');
           }
         } else if (pendingEmail) {
-          // User just registered, go to email verification pending screen
           router.replace('/(auth)/email-verification-pending');
         } else {
           router.replace('/(auth)/welcome');

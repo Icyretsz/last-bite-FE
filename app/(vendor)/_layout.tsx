@@ -18,6 +18,8 @@ export default function VendorLayout() {
         headerTitleStyle: {
           fontWeight: '700',
         },
+        animation: 'shift',
+        animationDuration: 200,
       }}
     >
       <Tabs.Screen

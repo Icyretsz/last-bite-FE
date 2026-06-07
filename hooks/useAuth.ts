@@ -39,7 +39,13 @@ export function useLogin() {
     retry: false,
     onSuccess: async (result) => {
       await tokenStorage.setTokens(result.access_token, result.refresh_token);
-      router.replace('/(consumer)/home');
+      const isFirst = await tokenStorage.isFirstLogin();
+      if (isFirst) {
+        await tokenStorage.setFirstLoginComplete();
+        router.replace('/(auth)/preferences');
+      } else {
+        router.replace('/(consumer)/home');
+      }
     },
     onError: (error: ApiError) => {
       const message = error.message || 'An error occurred';
