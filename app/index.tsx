@@ -6,6 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Svg, { Text as SvgText } from 'react-native-svg';
 import { router } from 'expo-router';
 import { storage } from '@/services/storage';
+import { tokenStorage } from '@/services/tokenStorage';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,6 +24,7 @@ export default function AppSplashScreen() {
         await SplashScreen.hideAsync();
 
         const user = storage.getCurrentUser();
+        const pendingEmail = await tokenStorage.getItem('pending_verification_email');
 
         if (user) {
           if (user.isVendor) {
@@ -30,6 +32,9 @@ export default function AppSplashScreen() {
           } else {
             router.replace('/(consumer)/home');
           }
+        } else if (pendingEmail) {
+          // User just registered, go to email verification pending screen
+          router.replace('/(auth)/email-verification-pending');
         } else {
           router.replace('/(auth)/login');
         }

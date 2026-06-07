@@ -10,11 +10,21 @@ export function useRegister() {
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: (data: RegisterRequest) => authService.register(data),
+    mutationFn: async (data: RegisterRequest) => {
+      console.log('[useRegister] Calling authService.register...');
+      const result = await authService.register(data);
+      console.log('[useRegister] Register success, saving email...');
+      await tokenStorage.setItem('pending_verification_email', data.email);
+      console.log('[useRegister] Done. Email saved. Redirecting...');
+      return result;
+    },
+    retry: false,
     onSuccess: () => {
-      router.replace('/(auth)/email-verification-pending');
+      console.log('[useRegister] onSuccess callback. Navigating to verify-otp...');
+      router.replace('/(auth)/verify-otp');
     },
     onError: (error: Error) => {
+      console.log('[useRegister] onError:', error.message);
       Alert.alert(t('common.error'), error.message);
     },
   });

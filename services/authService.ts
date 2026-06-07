@@ -54,12 +54,22 @@ async function handleResponse<T>(res: Response): Promise<T> {
 }
 
 export const authService = {
-  register: (body: RegisterRequest): Promise<LoginResult> =>
-    fetch(getApiUrl('/api/v1/auth/register'), {
+  register: (body: RegisterRequest): Promise<void> => {
+    console.log('[authService] POST /api/v1/auth/register', body);
+    return fetch(getApiUrl('/api/v1/auth/register'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
-    }).then(handleResponse<LoginResult>),
+    }).then(async (res) => {
+      console.log('[authService] Response status:', res.status);
+      const data = await res.json();
+      console.log('[authService] Response data:', JSON.stringify(data));
+      if (data.code !== 1000) {
+        throw new ApiError(getErrorMessage(data.code), res.status, data.code);
+      }
+      return; // register returns 201 with no body
+    });
+  },
 
   login: (body: LoginRequest): Promise<LoginResult> =>
     fetch(getApiUrl('/api/v1/auth/login'), {

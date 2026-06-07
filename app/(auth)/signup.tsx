@@ -1,5 +1,6 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { LoadingSpinner } from '@/components/loading-spinner';
 import { Colors } from '@/constants/colors';
 import { useRegister } from '@/hooks/useAuth';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,11 +26,15 @@ export default function SignupScreen() {
   });
 
   const onSubmit = (data: SignupFormData) => {
+    console.log('[Signup] Submitting:', data.email);
     register({ email: data.email, password: data.password, fullName: data.name, phone: data.phone });
   };
 
   return (
-    <KeyboardAvoidingView 
+    <>
+      <LoadingSpinner visible={isPending} />
+
+      <KeyboardAvoidingView 
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
@@ -118,15 +123,16 @@ export default function SignupScreen() {
             onPress={handleSubmit(onSubmit)}
             disabled={isPending}
           />
-
-          <Button
-            title={t('auth.alreadyHaveAccount')}
-            onPress={() => router.back()}
-            variant="outline"
-          />
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+
+      <Button
+        title={t('auth.alreadyHaveAccount')}
+        onPress={() => router.back()}
+        variant="outline"
+      />
+    </>
   );
 }
 

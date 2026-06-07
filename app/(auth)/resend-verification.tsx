@@ -31,7 +31,7 @@ export default function ResendVerificationScreen() {
     setLoading(true);
     setError('');
     try {
-      await authService.resendVerificationLink({ email: email.trim() });
+      await authService.resendOtp({ email: email.trim() });
       setSuccess(true);
     } catch (err: any) {
       setError(err.message || t('common.hasError'));
