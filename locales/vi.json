@@ -20,6 +20,19 @@
     "tapToEdit": "Nhấn để chỉnh sửa",
     "hasError": "Có lỗi xảy ra. Vui lòng thử lại sau"
   },
+  "welcome": {
+    "tagline": "Tiết kiệm thực phẩm. Tiết kiệm tiền. Bảo vệ môi trường.",
+    "step1Title": "Khám phá túi bất ngờ",
+    "step1Desc": "Duyệt các túi giảm giá từ các cửa hàng gần đó trước giờ đóng cửa.",
+    "step2Title": "Đặt chỗ & nhận hàng",
+    "step2Desc": "Đặt túi của bạn và nhận hàng — cho nhân viên xem mã.",
+    "step3Title": "Tận hưởng & giảm lãng phí",
+    "step3Desc": "Thưởng thức đồ ăn ngon với giá chiết khấu cùng lúc giúp chống lãng phí thực phẩm.",
+    "getStarted": "Bắt đầu",
+    "footerNote": "Nhà hàng đăng đồ thừa. Bạn cứu lấy nó.",
+    "next": "Tiếp theo",
+    "skip": "Bỏ qua"
+  },
   "daysOfWeekShort": {
     "Monday": "T2",
     "Tuesday": "T3",

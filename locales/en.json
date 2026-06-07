@@ -20,6 +20,19 @@
     "tapToEdit": "Tap to edit",
     "hasError": "Error. Please try again later"
   },
+  "welcome": {
+    "tagline": "Save food. Save money. Help the planet.",
+    "step1Title": "Discover surprise bags",
+    "step1Desc": "Browse discounted bags from nearby stores near closing time.",
+    "step2Title": "Reserve & pick up",
+    "step2Desc": "Reserve your bag and pick it up — show your code to the staff.",
+    "step3Title": "Enjoy & reduce waste",
+    "step3Desc": "Enjoy great food at a discount while helping fight food waste.",
+    "getStarted": "Get Started",
+    "footerNote": "Restaurants list leftover food. You save it.",
+    "next": "Next",
+    "skip": "Skip"
+  },
   "daysOfWeekShort": {
     "Monday": "Mon",
     "Tuesday": "Tue",

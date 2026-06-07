@@ -36,7 +36,7 @@ export default function AppSplashScreen() {
           // User just registered, go to email verification pending screen
           router.replace('/(auth)/email-verification-pending');
         } else {
-          router.replace('/(auth)/login');
+          router.replace('/(auth)/welcome');
         }
       };
 

@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router';
 import { Controller, useForm } from 'react-hook-form';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useFonts } from 'expo-font';
 import Svg, { Text as SvgText } from 'react-native-svg';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL ?? '';
@@ -23,6 +24,11 @@ export default function LoginScreen() {
   const { t } = useTranslation();
   const { mutate: login, isPending: isLoginPending } = useLogin();
   const { mutate: googleSignIn, isPending: isGooglePending } = useGoogleSignIn();
+  const [fontsLoaded] = useFonts({
+    'amoresa': require('@/assets/fonts/amoresa-regular.otf'),
+    'perandory': require('@/assets/fonts/perandory-semicondensed.otf'),
+  });
+
 
   const { control, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
     defaultValues: { email: '', password: '' },
@@ -42,6 +48,14 @@ export default function LoginScreen() {
     // 3. Install expo-auth-session and configure the request
     console.log('Google Sign-In pressed — configure expo-auth-session to enable');
   };
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -150,6 +164,16 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: Colors.backgroundGray,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingText: {
+    fontSize: 16,
+    color: Colors.textGray,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.backgroundGray,
