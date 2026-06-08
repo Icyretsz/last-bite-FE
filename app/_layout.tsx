@@ -32,121 +32,121 @@ export default function RootLayout() {
       <Stack.Screen name="(vendor)" options={{ headerShown: false }} />
       
       {/* Consumer Detail Screens */}
-      <Stack.Screen 
-        name="category/[type]" 
-        options={{ 
+      <Stack.Screen
+        name="category/[type]"
+        options={{
           title: t('offer.category'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="offer/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="offer/[id]"
+        options={{
           title: t('offer.bagDetails'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="vendor/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="vendor/[id]"
+        options={{
           title: t('vendor.vendorProfile'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="checkout/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="checkout/[id]"
+        options={{
           title: t('checkout.checkout'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="payment/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="payment/[id]"
+        options={{
           title: t('checkout.payment'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="confirmation/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="confirmation/[id]"
+        options={{
           title: t('checkout.confirmed'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="review/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="review/[id]"
+        options={{
           title: t('review.writeReview'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="order-details/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="order-details/[id]"
+        options={{
           title: t('orderDetails.orderDetails'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
           headerStyle: {
             backgroundColor: Colors.secondary,
           },
           headerTintColor: Colors.white,
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="verify-collection/[code]" 
-        options={{ 
+      <Stack.Screen
+        name="verify-collection/[code]"
+        options={{
           title: t('orderDetails.verifyCollection'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
           headerStyle: {
             backgroundColor: Colors.secondary,
           },
           headerTintColor: Colors.white,
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="create-bag" 
-        options={{ 
+      <Stack.Screen
+        name="create-bag"
+        options={{
           title: t('offer.createBag'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
           headerStyle: {
             backgroundColor: Colors.secondary,
           },
           headerTintColor: Colors.white,
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="edit-bag/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="edit-bag/[id]"
+        options={{
           title: t('offer.editBag'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
           headerStyle: {
             backgroundColor: Colors.secondary,
           },
           headerTintColor: Colors.white,
-        }} 
+        }}
       />
-      <Stack.Screen 
-        name="edit-offer/[id]" 
-        options={{ 
+      <Stack.Screen
+        name="edit-offer/[id]"
+        options={{
           title: t('offer.bagDetails'),
-          presentation: 'card',
+          animation: 'slide_from_right',
           headerBackTitle: t('common.back'),
           headerStyle: {
             backgroundColor: Colors.secondary,
           },
           headerTintColor: Colors.white,
-        }} 
+        }}
       />
     </Stack>
     </LanguageProvider>

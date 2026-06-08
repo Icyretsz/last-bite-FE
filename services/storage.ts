@@ -51,6 +51,16 @@ class Storage {
     return this.currentUser;
   }
 
+  setCurrentUserByEmail(email: string) {
+    this.currentUser = {
+      id: email,
+      email,
+      name: email.split('@')[0],
+      role: 'consumer',
+      isVendor: false,
+    };
+  }
+
   logout() {
     this.currentUser = null;
     this.accessToken = null;

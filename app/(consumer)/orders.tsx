@@ -114,51 +114,64 @@ export default function OrdersScreen() {
         {/* Filters */}
         <View style={styles.filtersSection}>
           <Text style={styles.filterLabel}>{t('orders.status')}</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterRow}>
-            {(['All', 'Reserved', 'Collected', 'Cancelled'] as StatusFilter[]).map(status => (
-              <TouchableOpacity
-                key={status}
-                style={[
-                  styles.filterChip,
-                  statusFilter === status && styles.filterChipActive
-                ]}
-                onPress={() => setStatusFilter(status)}
-              >
-                <Text style={[
-                  styles.filterChipText,
-                  statusFilter === status && styles.filterChipTextActive
-                ]}>
-                  {t(`orders.${status.toLowerCase()}`)}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+          <View style={styles.statusGrid}>
+            {([
+              { key: 'All', color: Colors.textGray, icon: 'apps' },
+              { key: 'Reserved', color: Colors.secondary, icon: 'time' },
+              { key: 'Collected', color: Colors.success, icon: 'checkmark-circle' },
+              { key: 'Cancelled', color: Colors.error, icon: 'close-circle' },
+            ] as const).map(({ key, color, icon }) => {
+              const active = statusFilter === key;
+              return (
+                <TouchableOpacity
+                  key={key}
+                  style={[
+                    styles.statusChip,
+                    active && { backgroundColor: color, borderColor: color },
+                  ]}
+                  onPress={() => setStatusFilter(key)}
+                  activeOpacity={0.7}
+                >
+                  <Ionicons
+                    name={icon as any}
+                    size={14}
+                    color={active ? '#fff' : color}
+                  />
+                  <Text
+                    style={[
+                      styles.statusChipText,
+                      active && { color: '#fff' },
+                    ]}
+                  >
+                    {t(`orders.${key.toLowerCase()}`)}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
 
           <Text style={styles.filterLabel}>{t('orders.date')}</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterRow}>
+          <View style={styles.dateSegment}>
             {(['All', 'Today', 'This Week', 'This Month'] as DateFilter[]).map(date => {
-              const dateKey = date === 'All' ? 'all' : 
-                             date === 'Today' ? 'today' :
-                             date === 'This Week' ? 'thisWeek' : 'thisMonth';
+              const dateKey =
+                date === 'All' ? 'all' :
+                date === 'Today' ? 'today' :
+                date === 'This Week' ? 'thisWeek' : 'thisMonth';
+              const active = dateFilter === date;
               return (
                 <TouchableOpacity
                   key={date}
-                  style={[
-                    styles.filterChip,
-                    dateFilter === date && styles.filterChipActive
-                  ]}
+                  style={[styles.dateSegmentBtn, active && styles.dateSegmentBtnActive]}
                   onPress={() => setDateFilter(date)}
+                  activeOpacity={0.7}
                 >
-                  <Text style={[
-                    styles.filterChipText,
-                    dateFilter === date && styles.filterChipTextActive
-                  ]}>
+                  <Text style={[styles.dateSegmentText, active && styles.dateSegmentTextActive]}>
                     {t(`orders.${dateKey}`)}
                   </Text>
                 </TouchableOpacity>
               );
             })}
-          </ScrollView>
+          </View>
         </View>
 
         {activeOrders.length > 0 && (
@@ -412,40 +425,73 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   filtersSection: {
-    marginBottom: 20,
+    backgroundColor: Colors.white,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 2,
   },
   filterLabel: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
-    color: Colors.text,
-    marginBottom: 8,
-    marginTop: 8,
+    color: Colors.textGray,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 10,
   },
-  filterRow: {
+  statusGrid: {
     flexDirection: 'row',
-    marginBottom: 8,
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 16,
   },
-  filterChip: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+  statusChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
     borderRadius: 20,
+    borderWidth: 1.5,
+    borderColor: Colors.backgroundGray,
     backgroundColor: Colors.white,
-    borderWidth: 1,
-    borderColor: Colors.textGray,
-    marginRight: 8,
   },
-  filterChipActive: {
-    backgroundColor: Colors.primary,
-    borderColor: Colors.primary,
-  },
-  filterChipText: {
-    fontSize: 14,
-    color: Colors.text,
-    fontWeight: '500',
-  },
-  filterChipTextActive: {
-    color: Colors.white,
+  statusChipText: {
+    fontSize: 13,
     fontWeight: '600',
+    color: Colors.text,
+  },
+  dateSegment: {
+    flexDirection: 'row',
+    backgroundColor: Colors.backgroundGray,
+    borderRadius: 10,
+    padding: 3,
+  },
+  dateSegmentBtn: {
+    flex: 1,
+    paddingVertical: 7,
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  dateSegmentBtnActive: {
+    backgroundColor: Colors.white,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  dateSegmentText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: Colors.textGray,
+  },
+  dateSegmentTextActive: {
+    color: Colors.text,
   },
   section: {
     marginBottom: 24,

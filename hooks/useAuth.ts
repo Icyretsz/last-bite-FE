@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { authService, ApiError, LoginRequest, RegisterRequest } from '@/services/authService';
 import { tokenStorage } from '@/services/tokenStorage';
+import { storage } from '@/services/storage';
 
 export function useRegister() {
   const router = useRouter();
@@ -37,8 +38,10 @@ export function useLogin() {
   return useMutation({
     mutationFn: (data: LoginRequest) => authService.login(data),
     retry: false,
-    onSuccess: async (result) => {
+    onSuccess: async (result, variables) => {
       await tokenStorage.setTokens(result.access_token, result.refresh_token);
+      await tokenStorage.setCurrentUserEmail(variables.email);
+      storage.setCurrentUserByEmail(variables.email);
       const isFirst = await tokenStorage.isFirstLogin();
       if (isFirst) {
         await tokenStorage.setFirstLoginComplete();

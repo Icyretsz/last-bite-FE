@@ -83,4 +83,32 @@ export const tokenStorage = {
     await waitForStorage();
     await AsyncStorage.setItem(IS_FIRST_LOGIN_KEY, 'false');
   },
+
+  async setCurrentUserId(userId: string): Promise<void> {
+    await waitForStorage();
+    await AsyncStorage.setItem('current_user_id', userId);
+  },
+
+  async getCurrentUserId(): Promise<string | null> {
+    await waitForStorage();
+    try {
+      return await AsyncStorage.getItem('current_user_id');
+    } catch {
+      return null;
+    }
+  },
+
+  async setCurrentUserEmail(email: string): Promise<void> {
+    await waitForStorage();
+    await AsyncStorage.setItem('current_user_email', email);
+  },
+
+  async getCurrentUserEmail(): Promise<string | null> {
+    await waitForStorage();
+    try {
+      return await AsyncStorage.getItem('current_user_email');
+    } catch {
+      return null;
+    }
+  },
 };

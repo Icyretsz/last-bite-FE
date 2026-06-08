@@ -23,13 +23,14 @@ export default function AppSplashScreen() {
         await new Promise(resolve => setTimeout(resolve, 100));
         await SplashScreen.hideAsync();
 
-        const user = storage.getCurrentUser();
         let pendingEmail = null;
         try {
           pendingEmail = await tokenStorage.getItem('pending_verification_email');
         } catch {
-          // AsyncStorage not ready, continue without pending email
+          // AsyncStorage not ready
         }
+
+        const user = storage.getCurrentUser();
 
         if (user) {
           if (user.isVendor) {

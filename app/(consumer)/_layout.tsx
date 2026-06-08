@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function ConsumerLayout() {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Tabs
       screenOptions={{
